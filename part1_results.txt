@@ -1,0 +1,336 @@
+============================================================
+PART 1: CODE Q&A SYSTEM RESULTS
+============================================================
+
+QUESTION 1: What Python dependencies does this project use?
+TYPE: dependencies
+----------------------------------------
+ANSWER:
+# Python Dependencies for mcp-gateway-registry
+
+Based on the `pyproject.toml` file, this project uses the following Python dependencies:
+
+## Core Dependencies
+
+**Web Framework & Server:**
+- fastapi>=0.115.12
+- uvicorn[standard]>=0.34.2
+- aiofiles>=24.1.0
+- aiohttp>=3.8.0
+
+**Data & Validation:**
+- pydantic>=2.11.3
+- pydantic-settings>=2.0.0
+- pyyaml>=6.0.0
+
+**MCP (Model Context Protocol):**
+- mcp>=1.9.3
+- langchain-mcp-adapters>=0.0.11
+
+**AI/ML & Vector Search:**
+- sentence-transformers>=3.0.0
+- faiss-cpu>=1.7.4
+- torch>=1.6.0
+- scikit-learn>=1.3.0
+- langchain-anthropic>=0.3.17
+- langchain-aws>=0.2.23
+- langgraph>=0.4.3
+- litellm>=1.50.0
+
+**AWS & Cloud:**
+- boto3>=1.35.0
+- awscli>=1.36.0
+- langchain-aws>=0.2.23
+
+**Database:**
+- motor>=3.3.0
+- pymongo>=4.6.0
+- dnspython>=2.4.0
+
+**Utilities:**
+- httpx>=0.27.0
+- python-dotenv>=1.1.0
+- python-multipart>=0.0.20
+- itsdangerous>=2.2.0
+- jinja2>=3.1.6
+- websockets>=15.0.1
+- huggingface-hub>=0.31.1
+- pytz>=2025.2
+- pyjwt>=2.10.1
+- typing-extensions>=4.8.0
+- httpcore[asyncio]>=1.0.9
+- email-validator>=2.2.0
+- rich>=13.0.0
+- requests>=2.31.0
+- psutil>=6.1.0
+- cryptography>=46.0.3
+- prometheus-client>=0.20.0
+
+**Security & Scanning:**
+- bandit>=1.8.3
+- cisco-ai-skill-scanner>=1.0.0
+- cisco-ai-a2a-scanner (from git)
+
+**Agents:**
+- strands-agents>=0.1.6
+- strands-agents-tools>=0.1.4
+
+(Found in pyproject.toml, lines 1-53)
+============================================================
+
+QUESTION 2: What is the main entry point file for the registry service?
+TYPE: entrypoint
+----------------------------------------
+ANSWER:
+The main entry point file for the registry service is **`registry/main.py`**.
+
+This file contains:
+1. **FastAPI() instantiation** - indicating it's the primary application setup file (found in `/Users/animeliksetyan/Documents/DSAN_AIAgent/spring-2026-a03-Animeliksetyan/mcp-gateway-registry/registry/main.py`)
+2. **`__main__` block** - confirming it's executable as the entry point (found in the same file)
+
+While `registry/scripts/inspect-documentdb.py` also contains a `__main__` block, it appears to be a utility/script file rather than the primary service entry point, given that only `main.py` contains the FastAPI() application instantiation.
+============================================================
+
+QUESTION 3: What programming languages and file types are used in this repository?
+TYPE: filetypes
+----------------------------------------
+ANSWER:
+# Programming Languages and File Types in mcp-gateway-registry
+
+Based on the file type distribution in the repository, the following programming languages and file types are used:
+
+## Primary Languages:
+1. **Python** (.py) - 329 files - The dominant language in the codebase
+2. **TypeScript/JavaScript** (.ts, .tsx, .js) - 99 files total (56 TSX, 43 TS, 3 JS) - Used for frontend/React components
+3. **Shell Scripting** (.sh) - 63 files - Automation and deployment scripts
+4. **Lua** (.lua) - 4 files - Configuration/scripting purposes
+
+## Infrastructure & Configuration:
+5. **Terraform** (.tf) - 30 files - Infrastructure as Code
+6. **YAML** (.yaml, .yml) - 61 files total - Configuration files
+7. **TOML** (.toml) - 9 files - Configuration management
+8. **JSON** (.json) - 69 files - Data serialization and config
+9. **HTML** (.html) - 10 files - Web templates
+10. **CSS** (.css) - 2 files - Styling
+
+## Documentation:
+11. **Markdown** (.md) - 134 files - Primary documentation format
+
+## Specialized Formats:
+12. **Custom/Registry Formats** (.mcp-server, .mcp-server-light, .mcp-server-cpu, .registry, .registry-cpu, .scopes-init, .network-trusted-token, .auth) - 8 files - Domain-specific configurations
+13. **Templates** (.template, .tpl) - 4 files
+14. **Configuration** (.conf, .ini) - 3 files
+15. **Other** (.example, .dockerignore, .gitignore, .lock, .disabled, .backup, .patch, .drawio, .svg, .claudeignore) - Various support files
+
+## Media:
+16. **Images** (.png, .gif, .svg) - 29 files - Documentation and diagrams
+
+The repository is **primarily Python-based** with significant TypeScript/React frontend components, infrastructure automation via Terraform, and comprehensive documentation.
+============================================================
+
+QUESTION 4: How does the authentication flow work, from token validation to user authorization?
+TYPE: auth_flow
+----------------------------------------
+ANSWER:
+# Authentication Flow: Token Validation to User Authorization
+
+Based on the provided context, here's how the authentication flow works:
+
+## Token Validation
+
+**Bearer Token Validation** (`registry/auth/internal.py`, lines 105-107):
+- The system validates Bearer JWT tokens signed with `SECRET_KEY`
+- The validation function `_validate_bearer_token(auth_header: str)` extracts and validates the token from the Authorization header (line 105-106)
+- Tokens include a `"token_use": "access"` claim indicating their purpose (`registry/auth/internal.py`, line 60)
+
+## Token Generation
+
+**Internal Token Generation** (`registry/auth/internal.py`, lines 31-60):
+- The `generate_internal_token()` function creates JWT tokens internally
+- Tokens are signed with the application's secret key
+
+**Rate Limiting** (`auth_server/server.py`, lines 70-71):
+- Token generation is rate-limited using an in-memory counter (`user_token_generation_counts`)
+- This prevents abuse of token generation endpoints
+
+## Authorization Flow
+
+**Static Token Authentication** (`auth_server/server.py`, lines 77-78):
+- The system supports static API key authentication as an alternative to IdP JWT for Registry API access
+- This is configurable via `_registry_static_token_requested`
+
+**Middleware Protection** (`registry/middleware/mode_filter.py`, line 30):
+- Token endpoints (`/api/tokens/`) are protected by middleware filtering
+- This ensures only authorized requests reach the token generation logic
+
+## Additional Context Needed
+
+To provide a complete picture of the full authorization flow (scopes, permission checks, role-based access control), the following files should be examined:
+- `registry/auth/` directory (for scope/permission validation)
+- `docs/authentication-design.md` and `docs/registry-auth-architecture.md` (for architectural details)
+- `docs/static-token-auth.md` (for static token authorization specifics)
+============================================================
+
+QUESTION 5: What are all the API endpoints available in the registry service and what scopes do they require?
+TYPE: api_endpoints
+----------------------------------------
+ANSWER:
+# API Endpoints and Required Scopes in MCP Gateway Registry
+
+Based on the provided context, here are the available API endpoints organized by file:
+
+## Federation Routes
+(found in `federation_routes.py`)
+- `GET /federation/config` (line 34)
+- `POST /federation/config` (line 71)
+- `PUT /federation/config/{config_id}` (line 144)
+- `DELETE /federation/config/{config_id}` (line 191)
+- `GET /federation/configs` (line 230)
+
+All federation routes require authentication via `nginx_proxied_auth` dependency (line 38, 81, 153, 196, etc.)
+
+## Federation Export Routes
+(found in `federation_export_routes.py`)
+- `GET /health` (line 359)
+- `GET /servers` (line 377)
+- `GET /agents` (line 490)
+- `GET /security-scans` (line 599)
+
+## Virtual Server Routes
+(found in `virtual_server_routes.py`)
+- `GET /virtual-servers` (line 129)
+- `GET /virtual-servers/{vs_path:path}/tools` (line 167)
+- `POST /virtual-servers/{vs_path:path}/rate` (line 206)
+- `GET /virtual-servers/{vs_path:path}/rating` (line 253)
+- `GET /virtual-servers/{vs_path:path}` (line 275)
+- `POST /virtual-servers` (line 298)
+- `PUT /virtual-servers/{vs_path:path}` (line 354)
+- `DELETE /virtual-servers/{vs_path:path}` (line 414)
+
+## Search Routes
+(found in `search_routes.py`)
+- `POST /semantic` (line 353)
+
+## Config Routes
+(found in `config_routes.py`)
+- `GET /full` (line 351)
+- `GET ""` (line 431)
+- `GET /export` (line 661)
+
+## Management Routes (IAM)
+(found in `management_routes.py`)
+- `GET /iam/users` (line 126)
+- `POST /iam/users/m2m` (line 159)
+- `POST /iam/users/human` (line 181)
+- `DELETE /iam/users/{username}` (line 214)
+- `PATCH /iam/users/{username}/groups` (line 232)
+
+## Registry Routes
+(found in `registry_routes.py`)
+- `GET /servers` (line 41)
+- `GET /servers/{serverName:path}/versions` (line 110)
+- `GET /servers/{serverName:path}/versions/{version}` (line 203)
+
+## Well-Known Routes
+(found in `wellknown_routes.py`)
+- `GET /mcp-servers` (line 17)
+
+## Internal Routes
+(found in `internal_routes.py`)
+- `POST /internal/sessions/client` (line 43)
+- `GET /internal/sessions/client/{client_session_id}` (line 75)
+- `GET /internal/sessions/backend/{session_key:path}` (line 96)
+- `PUT /internal/sessions/backend/{session_key:path}` (line 132)
+- `DELETE /internal/sessions/backend/{session_key:path}` (line 168)
+
+## Server Routes
+(found in `server_routes.py`)
+- `GET /` (line 122) - HTML response
+- `GET /servers` (line 256) - JSON response
+- `POST /toggle/{service_path:path}` (line 393)
+- `POST /register` (line 500)
+- `POST /internal/register` (line 664)
+- `POST /internal/remove` (line 911)
+- `POST /internal/toggle` (line 1023)
+
+## Agent Routes
+(found in `agent_routes.py`)
+- `POST /agents/register` (line 307)
+- `GET /agents` (line 463)
+- `POST /agents/{path:path}/health` (line 558)
+- `POST /agents/{path:path}/rate` (line 636)
+- `GET /agents/{path:path}/rating` (line 686)
+- `POST /agents/{path:path}/toggle` (line 714)
+- `GET /agents/{path:path}` (line 780)
+
+## Skill Routes
+(found in `skill_routes.py`)
+- `GET /discovery` (line 78)
+- `GET ""` (line 138)
+- `POST /parse-skill-md` (line 160)
+- `GET /search` (line 190)
+- `GET /{skill_path:path}/health` (line 251)
+- `GET /{skill_path:path}/content` (line 272)
+
+## Peer Management Routes
+(found in `peer_management_routes.py`)
+- `GET ""` (line 86)
+- `POST ""` (line 116)
+- `POST /sync` (line 171)
+- `GET /connections/all` (line 214)
+- `GET /shared-resources` (line 251)
+
+## Scope System
+The scope system is defined in the codebase (line 90 shows default `["registry-admins"]` scope), and scopes are loaded from repository via `reload_scopes_from_repository()` (line 112) and mapped from Cognito groups via `map_cognito_groups_to_scopes()` (line 140).
+
+**Note:** The provided context shows authentication dependencies and route definitions but does not include the specific scope requirements per endpoint. To get complete scope requirements, the actual endpoint implementations and authorization checks in each route file would need to be examined.
+============================================================
+
+QUESTION 6: How would you add support for a new OAuth provider (e.g., Okta) to the authentication system? What files would need to be modified and what interfaces must be implemented?
+TYPE: architecture
+----------------------------------------
+ANSWER:
+# Adding Support for a New OAuth Provider (Okta)
+
+Based on the codebase structure, here's what would need to be implemented:
+
+## 1. **Create Provider Implementation**
+
+You would need to create a new provider file following the pattern of existing providers:
+- Reference existing implementations: `auth_server/providers/cognito.py`, `auth_server/providers/entra.py`, `auth_server/providers/keycloak.py`
+- Create: `auth_server/providers/okta.py`
+
+The new provider must implement the **base interface** defined in:
+- `auth_server/providers/base.py` (found in context as core interface)
+
+## 2. **Modify the Provider Factory**
+
+Update `auth_server/providers/factory.py` to include the new provider:
+- This file is imported in `auth_server/server.py` at line 41: `from providers.factory import get_auth_provider`
+- The factory uses the `AUTH_PROVIDER` environment variable (referenced in `auth_server/server.py`, line 1440)
+- Add a conditional branch to instantiate the Okta provider when `AUTH_PROVIDER=okta`
+
+## 3. **Implement OAuth Flow Handling**
+
+Depending on your OAuth flow needs, you may need to implement or extend:
+- `credentials-provider/oauth/generic_oauth_flow.py` - for generic OAuth flow logic
+- `credentials-provider/oauth/egress_oauth.py` - if Okta is used for egress authentication
+- `credentials-provider/oauth/ingress_oauth.py` - if Okta is used for ingress authentication
+
+## 4. **Token Generation** (if needed)
+
+Similar to existing implementations:
+- `credentials-provider/entra/generate_tokens.py`
+- `credentials-provider/keycloak/generate_tokens.py`
+
+Create corresponding token generation logic for Okta if it has unique token requirements.
+
+## 5. **Group Mapping Integration**
+
+The system maps identity provider groups to MCP scopes (`auth_server/server.py`, lines 289-292). Ensure your Okta implementation:
+- Properly extracts groups from Okta's token response
+- Returns them in a format compatible with the existing group-to-scope mapping logic
+
+**Note:** To provide more specific guidance on exact method signatures and class inheritance patterns, the actual content of `auth_server/providers/base.py` would need to be examined.
+============================================================
+

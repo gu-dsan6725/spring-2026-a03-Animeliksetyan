@@ -1,0 +1,111 @@
+Part 2: Multi-Source RAG Results
+============================================================
+
+Q1: What was the total revenue for Electronics category in December 2024?
+Answer:
+# Electronics Category Revenue - December 2024
+
+The total revenue for the Electronics category in December 2024 was **$142,864.31**.
+------------------------------------------------------------
+
+Q2: Which region had the highest sales volume?
+Answer:
+# Highest Sales Volume Region
+
+Based on the query result, **Central** is the region with the highest sales volume.
+------------------------------------------------------------
+
+Q3: What are the key features of the Wireless Bluetooth Headphones?
+Answer:
+# Key Features of the Wireless Bluetooth Headphones (ELEC001)
+
+The SoundMax Pro Wireless Bluetooth Headphones offer the following key features:
+
+1. **Active Noise Cancellation (ANC)** - Includes transparency mode for situational awareness
+
+2. **Bluetooth 5.2 Connectivity** - Stable connection with up to 30ft range
+
+3. **40-Hour Battery Life** - Extended playback with quick charge capability (10 minutes provides 3 hours of playback)
+
+4. **Premium Comfort** - Memory foam ear cushions designed for all-day wear
+
+5. **Portability** - Foldable design with included carrying case
+
+6. **Built-in Microphone** - Enables hands-free calling and voice assistant integration
+
+These headphones are priced at **$79.99** and are designed to be versatile for commuting, work-from-home scenarios, and everyday music listening without interruption.
+------------------------------------------------------------
+
+Q4: What do customers say about the Air Fryer's ease of cleaning?
+Answer:
+# Ease of Cleaning - Customer Feedback
+
+Based on customer reviews for the KitchenPro Elite Air Fryer (HOME003), customers are **very positive** about its ease of cleaning:
+
+## Key Comments:
+
+- **Patricia W. (5 stars)**: "Easy to clean and the presets work perfectly."
+- **Lisa G. (4 stars)**: "cleanup is a breeze"
+
+## Overall Assessment:
+
+Cleaning ease is mentioned as a **positive attribute** by multiple verified purchasers. While only 2 of the 5 featured reviews specifically address cleaning, both praise it as straightforward and quick. This contributes to the product's strong overall rating of **4.6/5 stars** across 5,234 reviews.
+
+No customers reported difficulties with cleaning or maintenance in the provided reviews, suggesting this is a reliable feature of the product.
+------------------------------------------------------------
+
+Q5: Which product has the best customer reviews and how well is it selling?
+Answer:
+# Product with Best Reviews & Sales Performance
+
+## Best Reviewed Product
+
+**Python Programming Guide** has the highest average rating at **4.67 stars** (5★, 5★, 4★ across 3 reviews). However, several products tie closely behind it:
+
+- **Ergonomic Office Chair**: 4.67 stars (5★, 5★, 4★)
+- **Vitamin C Serum**: 4.67 stars (5★, 5★, 4★)
+- **Organic Coffee Beans 1kg**: 4.67 stars (5★, 5★, 4★)
+- **Air Fryer 5.5L**: 4.67 stars (5★, 5★, 4★)
+- **Dog Food Premium 10kg**: 4.67 stars (5★, 5★, 4★)
+
+## Sales Performance
+
+Among the top-selling products in your data, **Running Shoes Men** performs best:
+- **1,324 units sold**
+- **$117,319.62 total revenue**
+- **Rating: 4.67 stars** (5★, 4★, 5★)
+
+This product achieves an excellent balance of high customer satisfaction and strong sales volume. The reviews highlight durability ("200+ miles"), comfort, and value—factors that directly support repeat purchases and strong revenue generation.
+
+## Recommendation
+
+**Running Shoes Men** is your best-performing product overall, combining top-tier reviews with the highest revenue among tracked items. The Python Programming Guide has equally strong reviews but isn't tracked in your sales data, so Running Shoes Men is the clear winner for products with measurable both review quality and sales success.
+------------------------------------------------------------
+
+Q6: I want a product for fitness that is highly rated and sells well in the West region. What do you recommend?
+Answer:
+# Recommendation: Yoga Mat Premium
+
+Based on the available data, the **Yoga Mat Premium** is your best choice for a highly-rated, well-selling fitness product in the West region.
+
+## Why this product:
+
+**Sales Performance:**
+- Leads all fitness products with 126 units sold in the West region
+- Significantly outperforms other fitness options (next closest is Hiking Backpack at 94 units)
+
+**Customer Ratings:**
+- Average rating: 4.7 out of 5 stars (across 3 verified reviews)
+- Consistently praised for quality, durability, and value
+- A yoga instructor specifically recommends it to students, indicating professional-grade quality
+
+**Key Customer Benefits:**
+- Superior grip, even during hot yoga
+- Adequate thickness for joint protection
+- Durable construction (verified 6+ months of daily use)
+- Includes carrying strap for convenience
+- Excellent value for the price
+
+This product combines strong market demand with genuine customer satisfaction, making it an ideal fitness recommendation for your West region customers.
+------------------------------------------------------------
+
